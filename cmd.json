@@ -1,0 +1,53 @@
+{
+	"main": {
+		"task": "TS42"
+	},
+	"schedulers": [
+		{
+			"task":"svnup",
+			"autolaunch": true,
+			"cron": "0 0 * * *"
+		}
+	],
+	"tasks": {
+		"svnup": [
+			{
+				"cmd": "svn cleanup",
+				"cwd": ".",
+				"required": true
+			},
+			{
+				"cmd": "svn up",
+				"cwd": ".",
+				"required": false
+			}, 
+			{
+				"cmd": "svn cleanup",
+				"cwd": "../datalogger",
+				"required": true
+			},
+			{
+				"cmd": "svn up",
+				"cwd": "../datalogger",
+				"required": false
+			}],
+			"TS42": [
+			{
+				"cmd": "svn up",
+				"cwd": ".",
+				"required": false
+			}, {
+				"cmd": "svn up",
+				"cwd": "../datalogger",
+				"required": false
+			}, {
+				"cmd": "mvn clean install -DskipTests",
+				"cwd": "TS42",
+				"required": true
+			}, {
+				"cmd": "mvn clean install -DskipTests",
+				"cwd": "../datalogger/"
+			}
+			]
+	}
+}
