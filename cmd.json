@@ -1,15 +1,37 @@
 {
+	"config": {
+		"transports": {
+			"gmail": {
+				"type": "mailer",
+				"config": {
+					"host": "10.195.154.117"
+				},
+				"from": "Node shell",
+				"to": "qsupernant@gmail.com"
+			}
+		}
+	},
 	"main": {
 		"task": "TS42"
 	},
 	"schedulers": [
 		{
+			"name": "svnup",
+			"description": "Update workspaces every day at midnight", 
 			"task":"svnup",
-			"autolaunch": true,
 			"cron": "0 0 * * *"
 		}
 	],
 	"tasks": {
+		"ifconfig": [{
+				"cmd": "ipconfig",
+				"transport": {
+					"id": "gmail",
+					"to": "qsupernant@gmail.com",
+					"subject": "ipconfig result"
+				}
+			}
+		],
 		"svnup": [
 			{
 				"cmd": "svn cleanup",
